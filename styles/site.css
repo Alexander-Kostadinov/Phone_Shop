@@ -1,0 +1,174 @@
+html,
+body {
+  height: 100%;
+  font-family: Verdana;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+}
+
+.navbar-brand {
+  max-width: fit-content;
+}
+
+#updateBtn {
+  margin-left: 10px;
+}
+
+.navbar-nav {
+  align-items: baseline;
+  max-width: fit-content;
+  justify-content: flex-start;
+}
+
+#loginContainer {
+  z-index: 1;
+}
+
+.footer {
+  position: static;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f8f9fa;
+}
+
+.footer .d-flex {
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.footer div {
+  flex: 1;
+  text-align: center;
+}
+
+.footer div:nth-child(2) {
+  flex: 2;
+}
+
+.container {
+  text-align: left;
+  margin: 0;
+  margin-right: auto;
+  margin-top: auto;
+  width: 100%;
+}
+
+.card {
+  display: inline-block;
+  width: calc(20% - 20px);
+  margin: 0 10px 20px 0;
+  vertical-align: top;
+  text-align: left;
+  margin-left: 10px;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.col-md-4.text-center {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.card-img-top {
+  max-width: 100%;
+}
+
+.card-body h5,
+.card-body p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+#loginPanel {
+  position: absolute;
+  right: 1%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: fit-content;
+  border: 1px solid #ccc;
+  padding: 1%;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+#loginPanel input,
+#loginPanel button {
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+#loginConfirmButton {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+#loginConfirmButton:hover {
+  background-color: #0056b3;
+}
+
+.hidden {
+  display: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+#reviewsContainer {
+  border: 1px solid black;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.order-form-container {
+  position: absolute;
+  left: 50%;
+  width: 80%;
+  padding: 20px;
+  max-width: 600px;
+  margin-top: 50px;
+  border-radius: 10px;
+  transform: translate(-50%);
+  background-color: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-lg {
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+#review:disabled {
+  background-color: white;
+  color: black;
+  opacity: 1;
+}
+
+#purchaseBtn:disabled,
+#submitButton:disabled,
+.dynamic-button:disabled {
+  opacity: 1;
+}
+
+#decreaseQuantity,
+#increaseQuantity {
+  width: 35px;
+  height: 35px;
+  padding: 0;
+  font-size: 18px;
+}

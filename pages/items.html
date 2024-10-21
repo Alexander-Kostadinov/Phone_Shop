@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Items</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <link href="../styles/site.css" rel="stylesheet">
+</head>
+
+<body ng-app="catalogApp" class="d-flex flex-column min-vh-100">
+    <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+        <a class="navbar-brand text-light font-weight-bold" href="../pages/index.html">Sukphone</a>
+        <a id="updateBtn" class="navbar-brand text-light font-weight-bold hidden" href="#">Update</a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link text-light font-weight-bold" href="../pages/index.html">Home</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle text-light font-weight-bold" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Products
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="../pages/items.html?item=cases">Cases</a>
+                    <a class="dropdown-item" href="../pages/items.html?item=protectors">Protectors</a>
+                    <a class="dropdown-item" href="../pages/items.html?item=headphones">Headphones</a>
+                    <a class="dropdown-item" href="../pages/items.html?item=chargers-cables">Chargers&Cables</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-light font-weight-bold" href="../pages/contact.html">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a id="loginLink" class="nav-link text-light font-weight-bold clickable">Log in</a>
+            </li>
+            <li class="nav-item">
+                <a id="logoutLink" class="nav-link text-light font-weight-bold hidden clickable">Log out</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div id="loginContainer" class="hidden">
+        <div id="loginPanel">
+            <input type="text" id="username" placeholder="Username" autocomplete="name">
+            <input type="password" id="password" placeholder="Password">
+            <button id="loginConfirmButton">Log In</button>
+        </div>
+    </div>
+
+    <div class="title text-center mt-auto">
+        <h2 id="pageTitle">Items</h2>
+    </div>
+
+    <div class="container">
+        <div id="items-list" class="card-list"></div>
+    </div>
+
+    <div id="orderForm" class="order-form-container hidden">
+        <h2 class="text-center">Order details</h2>
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name" autocomplete="name">
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" class="form-control" id="address" placeholder="Enter your address"
+                    autocomplete="address">
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone number</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Enter phone number"
+                    autocomplete="phone number">
+            </div>
+            <div class="form-group d-flex align-items-center">
+                <label for="quantity" class="mr-3">Quantity:</label>
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-outline-secondary" id="decreaseQuantity">-</button>
+                    <input type="text" class="form-control text-center mx-2" id="quantity" value="1" min="1"
+                        style="max-width: 100px;" readonly>
+                    <button type="button" class="btn btn-outline-secondary" id="increaseQuantity">+</button>
+                </div>
+                <div class="ml-5">
+                    <span for="price" class="mr-2">Total cost:</span>
+                    <span id="price">00.00</span>$
+                </div>
+            </div>
+            <div class="form-group">
+                <p class="font-weight-bold">Payment method</p>
+                <div class="d-flex">
+                    <div class="form-check form-check-inline mr-4">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="cash" value="cash"
+                            checked>
+                        <label class="form-check-label" for="cash">Cash</label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="radio" name="paymentMethod" id="card" value="card">
+                        <label class="form-check-label" for="card">Card</label>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="button" id="confirmButton" class="btn btn-primary btn-lg mr-4">Confirm</button>
+                <button type="button" id="cancelButton" class="btn btn-secondary btn-lg">Cancel</button>
+            </div>
+        </form>
+    </div>
+
+    <footer class="footer mt-auto py-3 bg-primary">
+        <div class="d-flex justify-content-around font-weight-bold">
+            <div>
+                <span class="text-light">Sukphone &#169;</span>
+            </div>
+            <div>
+                <span class="text-light">088-708-8291</span>
+            </div>
+            <div>
+                <span class="text-light">Blagoevgrad, Iskar 15</span>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="../scripts/script.js"></script>
+    <script src="../scripts/items.js"></script>
+    <script src="../scripts/order.js"></script>
+</body>
+
+</html>

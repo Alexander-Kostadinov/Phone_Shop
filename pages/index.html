@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sukphone</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/site.css">
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+  <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
+    <a class="navbar-brand text-light font-weight-bold" href="../pages/index.html">Sukphone</a>
+    <a id="updateBtn" class="navbar-brand text-light font-weight-bold hidden" href="#">Update</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link text-light font-weight-bold" href="../pages/index.html">Home</a>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle text-light font-weight-bold" id="navbarDropdown" role="button"
+          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Products
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="../pages/items.html?item=cases">Cases</a>
+          <a class="dropdown-item" href="../pages/items.html?item=protectors">Protectors</a>
+          <a class="dropdown-item" href="../pages/items.html?item=headphones">Headphones</a>
+          <a class="dropdown-item" href="../pages/items.html?item=chargers-cables">Chargers&Cables</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light font-weight-bold" href="../pages/contact.html">Contact</a>
+      </li>
+      <li class="nav-item">
+        <a id="loginLink" class="nav-link text-light font-weight-bold clickable">Log in</a>
+      </li>
+      <li class="nav-item">
+        <a id="logoutLink" class="nav-link text-light font-weight-bold hidden clickable">Log out</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="loginContainer" class="hidden">
+    <div id="loginPanel">
+      <input type="text" id="username" placeholder="Username" autocomplete="name">
+      <input type="password" id="password" placeholder="Password">
+      <button id="loginConfirmButton">Log In</button>
+    </div>
+  </div>
+
+  <div class="title mt-auto text-center">
+    <h1>Welcome to Sukphone</h1>
+    <p>Top 5 of best phones to best prices!</p>
+  </div>
+
+  <div class="d-flex justify-content-around w-100 mt-auto ml-auto">
+    <div class="card">
+      <img src="../images/iphone_15_pro.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">iPhone 15 Pro</h5>
+        <p class="card-text">Color: Black, 256 GB</p>
+        <span class="d-block mb-2">900$</span>
+        <a href="../pages/details.html?product=1" class="btn btn-primary">View</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="../images/15_plus_pink.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">iPhone 15 Plus</h5>
+        <p class="card-text">Color: Pink, 128 GB</p>
+        <span class="d-block mb-2">800$</span>
+        <a href="../pages/details.html?product=2" class="btn btn-primary">View</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="../images/iphone_15_blue.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">iPhone 15</h5>
+        <p class="card-text">Color: Blue, 128 GB</p>
+        <span class="d-block mb-2">800$</span>
+        <a href="../pages/details.html?product=3" class="btn btn-primary">View</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="../images/iphone_14_pro.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">iPhone 14 Pro</h5>
+        <p class="card-text">Color: Black, 256 GB</p>
+        <span class="d-block mb-2">850$</span>
+        <a href="../pages/details.html?product=4" class="btn btn-primary">View</a>
+      </div>
+    </div>
+
+    <div class="card">
+      <img src="../images/14_pro_max.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">iPhone 14 Pro Max</h5>
+        <p class="card-text">Color: White, 256 GB</p>
+        <span class="d-block mb-2">850$</span>
+        <a href="../pages/details.html?product=5" class="btn btn-primary">View</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer mt-auto bg-primary">
+    <div class="d-flex py-3 justify-content-around font-weight-bold">
+      <div>
+        <span class="text-light">Sukphone &#169;</span>
+      </div>
+      <div>
+        <span class="text-light">088-708-8291</span>
+      </div>
+      <div>
+        <span class="text-light">Blagoevgrad, Iskar 15</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="../scripts/script.js"></script>
+</body>
+
+</html>
