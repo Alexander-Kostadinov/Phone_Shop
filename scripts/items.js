@@ -14,25 +14,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const urlParams = new URLSearchParams(window.location.search);
     const pageName = urlParams.get('item');
     const database = firebase.database();
-
-    if (pageName == "cases") {
-        document.querySelector('title').textContent = "Cases";
-        document.getElementById('pageTitle').textContent = "Cases";
-    }
-    else if (pageName == "protectors") {
-        document.querySelector('title').textContent = "Protectors";
-        document.getElementById('pageTitle').textContent = "Protectors";
-    }
-    else if (pageName == "headphones") {
-        document.querySelector('title').textContent = "Headphones";
-        document.getElementById('pageTitle').textContent = "Headphones";
-    }
-    else if (pageName == "chargers-cables") {
-        document.querySelector('title').textContent = "Chargers & Cables";
-        document.getElementById('pageTitle').textContent = "Chargers & Cables";
-    }
-
     const itemsRef = database.ref(pageName);
+
+    document.querySelector('title').textContent = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+    document.getElementById('pageTitle').textContent = pageName.charAt(0).toUpperCase() + pageName.slice(1);
 
     itemsRef.on('value', (snapshot) => {
         const items = snapshot.val();
