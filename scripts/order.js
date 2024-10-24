@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', function () {
         itemLocation = 'Phones/' + productId;
 
         purchaseBtn.addEventListener('click', function () {
-            orderForm.classList.remove('hidden');
-            submitButton.disabled = true;
             purchaseBtn.disabled = true;
+            submitButton.disabled = true;
+            orderForm.classList.remove('hidden');
             stock = parseInt(document.getElementById('item-stock').textContent.match(/\d+/g));
             price.textContent = document.getElementById('item-price').textContent.match(/\d+(\.\d+)?/g);
             itemName = document.getElementById('item-name').textContent + ', ' +
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
 
                 const allButtons = document.querySelectorAll('.dynamic-button');
+
                 allButtons.forEach(btn => {
                     btn.disabled = true;
                 });
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const increaseBtn = document.getElementById('increaseQuantity');
 
     increaseBtn.addEventListener('click', function () {
-        if (quantity.value < stock) {
+        if (quantity.value < stock && quantity.value > 0) {
             quantity.value++;
             let currentPrice = parseFloat(quantity.value * (price.textContent / (quantity.value - 1)));
 
@@ -127,6 +128,43 @@ document.addEventListener('DOMContentLoaded', function () {
     address.addEventListener('blur', function() { validateField(address); });
     phoneNum.addEventListener('blur', function() { validateField(phoneNum); });
 
+    function sendOrderDetails() {
+        let maxOrderId = 0;
+        let paymentBtn = "";
+        const customerId = phoneNum.value;
+        const orderAddress = address.value;
+        const dateNow = new Date().toISOString().split('T')[0];
+
+        if (cashButton.checked === true) {
+            paymentBtn = cashButton.value;
+        }
+        else if (cardButton.checked === true) {
+            paymentBtn = cardButton.value;
+        }
+
+        const payMethod = paymentBtn;
+
+        orders.once('value', (snapshot) => {
+            snapshot.forEach((childSnapshot) => {
+                const orderId = parseInt(childSnapshot.key, 10);
+                if (orderId > maxOrderId) {
+                    maxOrderId = orderId;
+                }
+            });
+
+            const newOrderId = maxOrderId + 1;
+
+            const orderData = {
+                customer_id: customerId,
+                order_address: orderAddress,
+                pay_method: payMethod,
+                order_date: dateNow
+            };
+
+            orders.child(newOrderId).set(orderData);
+        });
+    }
+
     function sendCustomerDetails() {
         const customerName = name.value;
         const customerPhone = phoneNum.value;
@@ -136,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const existingCustomer = snapshot.val();
 
                 if (customerName !== existingCustomer.customer_name) {
-                    const confirmUpdate = window.confirm(`A customer with this phone number already exists with the name "${existingCustomer.customer_name}". Do you want to update your name to "${customerName}"?`);
+                    const confirmUpdate = window.confirm(`This phone number already exists with the name "${existingCustomer.customer_name}". Do you want to update the name to "${customerName}"?`);
 
                     if (confirmUpdate) {
                         customers.child(customerPhone).update({ customer_name: customerName })
@@ -154,32 +192,13 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             else {
                 const customerData = { customer_name: customerName };
-
                 customers.child(customerPhone).set(customerData)
                 .then(() => {
-                    alert(`Confirmation accepted. Thank you for your order, ${customerName}!`);
+                    alert(`Thank you for your order, "${customerName}"!`);
                 })
                 .catch((error) => {
-                    console.error('Failed to create a new client:', error);
-                });
-            }
-        });
-    }
-
-    function sendOrderDetails() {
-        let maxOrderId = 0;
-
-        orders.once('value', (snapshot) => {
-            snapshot.forEach((childSnapshot) => {
-                const orderId = parseInt(childSnapshot.key, 10);
-                if (orderId > maxOrderId) {
-                    maxOrderId = orderId;
-                }
-            });
-
-            const newOrderId = maxOrderId + 1;
-            const orderData = {
-                
+                    console.log('Failed to initialize customer: ', error);
+                })
             }
         });
     }
@@ -217,7 +236,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const isValidAddress = validateField(address);
         const isValidPhoneNum = validateField(phoneNum);
 
-        if (isValidName && isValidAddress && isValidPhoneNum) {
+        if (isValidName && isValidAddress && isValidPhoneNum && stock > 0) {
+            sendOrderDetails();
             sendCustomerDetails();
             sendOrderItemDetails();
 
@@ -227,6 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             const allButtons = document.querySelectorAll('.dynamic-button');
+
             allButtons.forEach(btn => {
                 btn.disabled = false;
             });
@@ -235,16 +256,26 @@ document.addEventListener('DOMContentLoaded', function () {
                 link.style.pointerEvents = 'auto';
             });
 
-            stock = 0;
+            let newStock = 0;
+            const itemRef = database.ref(itemLocation);
+            
+            itemRef.once('value', (snapshot) => {
+                newStock = parseInt(snapshot.val().stock - quantity.value);
+                itemRef.update({ stock: newStock });
+            });
 
+            stock = 0;
             name.value = "";
             address.value = "";
             phoneNum.value = "";
-
             cashButton.checked = true;
             cardButton.checked = false;
 
             orderForm.classList.add('hidden');
+        }
+        else if (stock < 1) {
+            alert('We are sorry! The item is out of stock.');
+            location.reload();
         }
         else {
             alert("Fields are required and cannot contain illegal characters or be empty!");
@@ -255,7 +286,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     cancelBtn.addEventListener('click', function () {
         stock = 0;
-
         name.value = "";
         address.value = "";
         phoneNum.value = "";

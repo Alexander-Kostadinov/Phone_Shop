@@ -2,19 +2,19 @@ document.addEventListener('DOMContentLoaded', function () {
     const loginContainer = document.getElementById('loginContainer');
     const loginLink = document.getElementById('loginLink');
     const loginConfirmButton = document.getElementById('loginConfirmButton');
-    const updateBtn = document.getElementById('updateBtn');
+    const orderHistoryBtn = document.getElementById('order-history');
     const logoutBtn = document.getElementById('logoutLink');
 
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
 
     if (isLoggedIn) {
         loginLink.classList.add('hidden');
-        updateBtn.classList.remove('hidden');
         logoutBtn.classList.remove('hidden');
+        orderHistoryBtn.classList.remove('hidden');
     }
     else {
-        updateBtn.classList.add('hidden');
         logoutBtn.classList.add('hidden');
+        orderHistoryBtn.classList.add('hidden');
     }
 
     loginLink.addEventListener('click', function () {

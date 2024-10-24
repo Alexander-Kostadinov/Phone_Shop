@@ -15,48 +15,46 @@ document.addEventListener('DOMContentLoaded', function () {
   firebase.initializeApp(firebaseConfig);
   const database = firebase.database();
 
-  function displayItemDetails(productId) {
-    const reviewsRef = database.ref("Reviews/" + productId);
-    const itemRef = database.ref("Phones/" + productId);
-    itemRef.once('value', (snapshot) => {
-      const itemDetails = snapshot.val();
+  const itemRef = database.ref("Phones/" + productId);
+  const reviewsRef = database.ref("Reviews/" + productId);
 
-      if (itemDetails) {
-        document.getElementById("item-name").innerText = itemDetails.model;
-        document.getElementById("item-description").innerText = itemDetails.description;
-        document.getElementById("item-stock").innerText = `Items in stock: ${itemDetails.stock}`;
-        document.getElementById("item-price").innerText = `Price: ${itemDetails.price}$`;
-        document.getElementById("item-image").src = itemDetails.image;
-        var reviewsContainer = document.getElementById("reviewsContainer");
+  itemRef.on('value', (snapshot) => {
+    const itemDetails = snapshot.val();
 
-        reviewsRef.once("value", function (snapshot) {
-          reviewsContainer.innerHTML = "";
-          var reviews = snapshot.val();
+    if (itemDetails) {
+      document.getElementById("item-name").innerText = itemDetails.model;
+      document.getElementById("item-description").innerText = itemDetails.description;
+      document.getElementById("item-stock").innerText = `Items in stock: ${itemDetails.stock}`;
+      document.getElementById("item-price").innerText = `Price: ${itemDetails.price}$`;
+      document.getElementById("item-image").src = itemDetails.image;
+      const reviewsContainer = document.getElementById("reviewsContainer");
 
-          for (let value in reviews) {
-            if (reviews.hasOwnProperty(value)) {
-              var child = document.createElement('div');
-              child.textContent = "submitted: " + reviews[value];
-              reviewsContainer.insertBefore(child, reviewsContainer.firstChild);
-            }
+      reviewsRef.on("value", function (snapshot) {
+        reviewsContainer.innerHTML = "";
+        var reviews = snapshot.val();
+
+        for (let value in reviews) {
+          if (reviews.hasOwnProperty(value)) {
+            var child = document.createElement('p');
+            child.textContent = "Submitted: " + reviews[value];
+            reviewsContainer.insertBefore(child, reviewsContainer.firstChild);
           }
-        });
-      } else {
-        console.log("Item not found!");
-      }
-    }, (error) => {
-      console.error("Error fetching item:", error);
-    });
-  }
+        }
+      });
+    }
+    else {
+      console.log("Item not found!");
+    }
+  }, (error) => {
+    console.error("Error fetching item:", error);
+  });
 
   const submitBtn = document.getElementById('submitButton');
 
   submitBtn.addEventListener('click', function (event) {
     event.preventDefault();
-    var reviewsContainer = document.getElementById("reviewsContainer");
     var reviewTextArea = document.getElementById('review');
     var reviewContent = reviewTextArea.value;
-    const reviewsRef = database.ref("Reviews/" + productId);
 
     if (reviewContent === '') {
       alert("Please enter your review before click the Submit button!");
@@ -76,6 +74,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
       }
+
       var newKey = maxKey + 1;
       var value = reviewContent;
       var newReview = {};
@@ -90,12 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    var child = document.createElement('div');
-    child.textContent = "submitted: " + reviewContent;
-    reviewsContainer.insertBefore(child, reviewsContainer.firstChild);
     reviewTextArea.value = '';
     event.target.blur();
   });
-
-  displayItemDetails(productId);
 });
