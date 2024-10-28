@@ -1,20 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
   const urlParams = new URLSearchParams(window.location.search);
   const productId = urlParams.get('product');
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAswWsyGO7ib_S9F7iM0xxUO9x6wEHJxWI",
-    authDomain: "phoneshop-7c8f1.firebaseapp.com",
-    databaseURL: "https://phoneshop-7c8f1-default-rtdb.firebaseio.com",
-    projectId: "phoneshop-7c8f1",
-    storageBucket: "phoneshop-7c8f1.appspot.com",
-    messagingSenderId: "1048100188554",
-    appId: "1:1048100188554:web:3b19fe3af5a02089d01873"
-  };
-
-  firebase.initializeApp(firebaseConfig);
+  
   const database = firebase.database();
-
   const itemRef = database.ref("Phones/" + productId);
   const reviewsRef = database.ref("Reviews/" + productId);
 

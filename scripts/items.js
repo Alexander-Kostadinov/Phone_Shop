@@ -1,16 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const firebaseConfig = {
-        apiKey: "AIzaSyAswWsyGO7ib_S9F7iM0xxUO9x6wEHJxWI",
-        authDomain: "phoneshop-7c8f1.firebaseapp.com",
-        databaseURL: "https://phoneshop-7c8f1-default-rtdb.firebaseio.com",
-        projectId: "phoneshop-7c8f1",
-        storageBucket: "phoneshop-7c8f1.appspot.com",
-        messagingSenderId: "1048100188554",
-        appId: "1:1048100188554:web:3b19fe3af5a02089d01873"
-    };
-
-    firebase.initializeApp(firebaseConfig);
-
     const urlParams = new URLSearchParams(window.location.search);
     const pageName = urlParams.get('item');
     const database = firebase.database();
@@ -59,11 +47,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 buyButton.setAttribute('data-item-key', pageName + '/' + key);
                 buyButton.textContent = 'Buy';
 
+                const editButton = document.createElement('button');
+                editButton.classList.add('edit-button', 'btn', 'btn-primary', 'mt-2', 'hidden');
+                editButton.setAttribute('data-item-key', pageName + '/' + key);
+                editButton.textContent = 'Edit';
+
+                if (localStorage.getItem('isLoggedIn') === 'true') {
+                    editButton.classList.remove('hidden');
+                }
+
                 cardBody.appendChild(cardTitle);
                 cardBody.appendChild(cardText);
                 cardBody.appendChild(price);
                 cardBody.appendChild(stock);
                 cardBody.appendChild(buyButton);
+                cardBody.appendChild(editButton);
 
                 card.appendChild(image);
                 card.appendChild(cardBody);
