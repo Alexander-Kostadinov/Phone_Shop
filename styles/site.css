@@ -141,7 +141,7 @@ body {
   width: 80%;
   padding: 20px;
   max-width: 600px;
-  margin-top: 50px;
+  margin-top: 5%;
   border-radius: 10px;
   transform: translate(-50%);
   background-color: #f8f9fa;
@@ -207,9 +207,84 @@ body {
   position: relative;
 }
 
-.edit-btn {
+#edit-button {
   position: absolute;
   width: 8%;
   bottom: 10px;
   right: 10px;
 }
+
+.edit-form-container {
+  position: absolute;
+  left: 50%;
+  max-width: 550px;
+  width: 80%;
+  padding: 20px;
+  margin-top: 5%;
+  transform: translate(-50%);
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+}
+
+.edit-form-container h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.6em;
+  font-weight: bold;
+}
+
+.edit-form-group {
+  margin-bottom: 10px;
+}
+
+.edit-form-group label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.edit-form-group input, .edit-form-group textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.edit-form-group textarea {
+  height: 45px;
+}
+
+.edit-form-group-row {
+  display: flex;
+  gap: 10px;
+}
+
+.half-width {
+  width: 50%;
+}
+
+.edit-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+#save-btn, #cancel-btn {
+  font-size: 1.2rem;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.button-group button {
+  flex: 1;
+}
+

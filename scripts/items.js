@@ -48,12 +48,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 buyButton.textContent = 'Buy';
 
                 const editButton = document.createElement('button');
-                editButton.classList.add('edit-button', 'btn', 'btn-primary', 'mt-2', 'hidden');
-                editButton.setAttribute('data-item-key', pageName + '/' + key);
+                editButton.classList.add('edit-btn', 'btn', 'btn-primary', 'mt-2');
                 editButton.textContent = 'Edit';
 
+                const deleteButton = document.createElement('button');
+                deleteButton.classList.add('delete-btn', 'btn', 'btn-danger', 'mt-2');
+                deleteButton.textContent = 'Delete';
+
+                const buttonGroup = document.createElement('div');
+                buttonGroup.classList.add('button-group', 'full-width');
+                buttonGroup.style.display = 'flex';
+                buttonGroup.style.gap = '10px';
+
                 if (localStorage.getItem('isLoggedIn') === 'true') {
-                    editButton.classList.remove('hidden');
+                    buttonGroup.appendChild(editButton);
+                    buttonGroup.appendChild(deleteButton);
                 }
 
                 cardBody.appendChild(cardTitle);
@@ -61,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 cardBody.appendChild(price);
                 cardBody.appendChild(stock);
                 cardBody.appendChild(buyButton);
-                cardBody.appendChild(editButton);
+                cardBody.appendChild(buttonGroup);
 
                 card.appendChild(image);
                 card.appendChild(cardBody);

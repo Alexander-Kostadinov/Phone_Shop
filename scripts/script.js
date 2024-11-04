@@ -6,14 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const logoutBtn = document.getElementById('logoutLink');
     const ordersContainer = document.getElementById('orders-container');
 
-    const firstEditBtn = document.getElementById('edit-1');
-    const secondEditBtn = document.getElementById('edit-2');
-    const thirdEditBtn = document.getElementById('edit-3');
-    const fourthEditBtn = document.getElementById('edit-4');
-    const fifthEditBtn = document.getElementById('edit-5');
-
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
-
     const firebaseConfig = {
         apiKey: "AIzaSyAswWsyGO7ib_S9F7iM0xxUO9x6wEHJxWI",
         authDomain: "phoneshop-7c8f1.firebaseapp.com",
@@ -26,6 +18,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     firebase.initializeApp(firebaseConfig);
 
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const pageName = window.location.pathname.split("/").pop().split(".")[0];
 
     if (isLoggedIn) {
@@ -33,15 +26,9 @@ document.addEventListener('DOMContentLoaded', function () {
         logoutBtn.classList.remove('hidden');
         orderHistoryBtn.classList.remove('hidden');
 
-        if (pageName === "index") {
-            firstEditBtn.classList.remove('hidden');
-            secondEditBtn.classList.remove('hidden');
-            thirdEditBtn.classList.remove('hidden');
-            fourthEditBtn.classList.remove('hidden');
-            fifthEditBtn.classList.remove('hidden');
-        }
-        else if (pageName === "contact") {
+        if (pageName === 'index' || pageName === 'contact') {
             const editButtons = document.querySelectorAll('.edit-btn');
+
             editButtons.forEach(btn => {
                 btn.classList.remove('hidden');
             });

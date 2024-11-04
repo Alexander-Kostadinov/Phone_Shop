@@ -43,6 +43,10 @@
         </ul>
     </nav>
 
+    <div class="title text-center mt-4">
+        <h2 id="pageTitle">Items</h2>
+    </div>
+
     <div id="loginContainer" class="hidden">
         <div id="loginPanel">
             <input type="text" id="username" placeholder="Username" autocomplete="name">
@@ -50,6 +54,39 @@
             <button id="loginConfirmButton">Log In</button>
         </div>
     </div>
+
+    <div class="edit-form-container hidden">
+        <h2>Edit item</h2>
+        <form>
+            <div class="edit-form-group">Brand
+                <input type="text" id="brand" name="brand" required>
+            </div>
+
+            <div class="edit-form-group">Description
+                <textarea id="edit-description" name="description" required></textarea>
+            </div>
+
+            <div class="edit-form-group">Image URL
+                <input type="url" id="edit-image-url" name="image-url" required>
+            </div>
+
+            <div class="edit-form-group-row">
+                <div class="edit-form-group half-width">Price
+                    <input type="number" id="edit-price" name="price" min="0" step="0.01" required>
+                </div>
+
+                <div class="edit-form-group half-width">Stock
+                    <input type="number" id="edit-stock" name="stock" min="0" required>
+                </div>
+            </div>
+
+            <div class="edit-form-actions">
+                <button type="button" id="save-btn" class="btn btn-primary">Save</button>
+                <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
+            </div>
+        </form>
+    </div>
+
 
     <div id="orders-container" class="ml-2 mt-2 hidden">
         <div class="order-history-form">
@@ -68,10 +105,6 @@
                 </table>
             </div>
         </div>
-    </div>
-
-    <div class="title text-center mt-auto">
-        <h2 id="pageTitle">Items</h2>
     </div>
 
     <div class="container">
@@ -123,7 +156,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-end">
-                <button type="button" id="confirmButton" class="btn btn-primary btn-lg mr-4">Confirm</button>
+                <button type="button" id="confirmButton" class="btn btn-primary btn-lg mr-2">Confirm</button>
                 <button type="button" id="cancelButton" class="btn btn-secondary btn-lg">Cancel</button>
             </div>
         </form>
@@ -149,6 +182,7 @@
     <script src="../scripts/script.js"></script>
     <script src="../scripts/items.js"></script>
     <script src="../scripts/order.js"></script>
+    <script src="../scripts/edit.js"></script>
 </body>
 
 </html>
