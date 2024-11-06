@@ -33,6 +33,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 btn.classList.remove('hidden');
             });
         }
+        else if (pageName === 'items') {
+            const addItemBtn = document.getElementById('add-item');
+            addItemBtn.classList.remove('hidden');
+        }
+        else if (pageName === 'details') {
+            const clearBtn = document.getElementById('clearButton');
+            clearBtn.classList.remove('hidden');
+        }
     }
 
     loginLink.addEventListener('click', function () {

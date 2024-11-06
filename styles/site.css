@@ -159,6 +159,8 @@ body {
   opacity: 1;
 }
 
+.edit-btn:disabled,
+.delete-btn:disabled,
 #purchaseBtn:disabled,
 #submitButton:disabled,
 .dynamic-button:disabled {

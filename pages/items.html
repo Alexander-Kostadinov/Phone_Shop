@@ -14,7 +14,8 @@
 <body ng-app="catalogApp" class="d-flex flex-column min-vh-100">
     <nav class="navbar navbar-expand-lg navbar-primary bg-primary">
         <a class="navbar-brand text-light font-weight-bold" href="../pages/index.html">Sukphone</a>
-        <a id="order-history" class="navbar-brand text-light font-weight-bold ml-2 hidden" href="#">View orders</a>
+        <a id="order-history" class="navbar-brand text-light font-weight-bold ml-2 clickable hidden">View orders</a>
+        <a id="add-item" class="navbar-brand text-light font-weight-bold ml-2 clickable hidden">Add item</a>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
                 <a class="nav-link text-light font-weight-bold" href="../pages/index.html">Home</a>
@@ -43,10 +44,6 @@
         </ul>
     </nav>
 
-    <div class="title text-center mt-4">
-        <h2 id="pageTitle">Items</h2>
-    </div>
-
     <div id="loginContainer" class="hidden">
         <div id="loginPanel">
             <input type="text" id="username" placeholder="Username" autocomplete="name">
@@ -55,7 +52,30 @@
         </div>
     </div>
 
-    <div class="edit-form-container hidden">
+    <div id="orders-container" class="ml-2 mt-2 hidden">
+        <div class="order-history-form">
+            <h2>Order list</h2>
+            <div id="order-list" class="mt-4">
+                <table style="width: 100%; text-align: center; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>Customer ID</th>
+                            <th>Item name</th>
+                            <th>Quantity</th>
+                            <th>Total price</th>
+                        </tr>
+                    </thead>
+                    <tbody id="order-rows"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="title text-center mt-4">
+        <h2 id="pageTitle">Items</h2>
+    </div>
+
+    <div id="edit-form" class="edit-form-container hidden">
         <h2>Edit item</h2>
         <form>
             <div class="edit-form-group">Brand
@@ -85,26 +105,6 @@
                 <button type="button" id="cancel-btn" class="btn btn-secondary">Cancel</button>
             </div>
         </form>
-    </div>
-
-
-    <div id="orders-container" class="ml-2 mt-2 hidden">
-        <div class="order-history-form">
-            <h2>Order list</h2>
-            <div id="order-list" class="mt-4">
-                <table style="width: 100%; text-align: center; border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th>Customer ID</th>
-                            <th>Item name</th>
-                            <th>Quantity</th>
-                            <th>Total price</th>
-                        </tr>
-                    </thead>
-                    <tbody id="order-rows"></tbody>
-                </table>
-            </div>
-        </div>
     </div>
 
     <div class="container">

@@ -44,12 +44,16 @@ document.addEventListener('DOMContentLoaded', function () {
                     link.style.pointerEvents = 'none';
                 });
 
-                const allButtons = document.querySelectorAll('.dynamic-button');
+                const editButtons = document.querySelectorAll('.edit-btn');
+                const deleteButtons = document.querySelectorAll('.delete-btn');
+                const dynamicButtons = document.querySelectorAll('.dynamic-button');
 
-                allButtons.forEach(btn => {
+                [...dynamicButtons, ...editButtons, ...deleteButtons].forEach(btn => {
                     btn.disabled = true;
                 });
             }
+
+            event.target.blur();
         });
     }
 
@@ -304,8 +308,11 @@ document.addEventListener('DOMContentLoaded', function () {
             submitButton.disabled = false;
         }
 
-        const allButtons = document.querySelectorAll('.dynamic-button');
-        allButtons.forEach(btn => {
+        const editButtons = document.querySelectorAll('.edit-btn');
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        const dynamicButtons = document.querySelectorAll('.dynamic-button');
+
+        [...dynamicButtons, ...editButtons, ...deleteButtons].forEach(btn => {
             btn.disabled = false;
         });
 
