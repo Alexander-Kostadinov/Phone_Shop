@@ -79,7 +79,7 @@
     <h2>Edit item</h2>
     <form>
       <div class="edit-form-group">Brand
-        <input type="text" id="brand" name="brand" required>
+        <input type="text" id="edit-brand" name="brand" required>
       </div>
 
       <div class="edit-form-group">Description
@@ -88,10 +88,6 @@
 
       <div class="edit-form-group">Image URL
         <input type="url" id="edit-image-url" name="image-url" required>
-      </div>
-
-      <div class="edit-form-group">Model
-        <input type="text" id="edit-model" name="model" required>
       </div>
 
       <div class="edit-form-group-row">
@@ -112,58 +108,53 @@
   </div>
 
   <div class="d-flex justify-content-around w-100 mt-auto ml-auto">
-    <div class="card">
-      <img src="../images/iphone_15_pro.jpg" class="card-img-top" alt="...">
+    <div class="card" id="card-1">
+      <img src="" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">iPhone 15 Pro</h5>
-        <p class="card-text">Color: Black, 256 GB</p>
-        <span class="d-block mb-2">900$</span>
+        <h5 class="card-title"></h5>
+        <p class="card-text"></p>
         <a href="../pages/details.html?product=1" class="btn btn-primary view-btn">View</a>
-        <button class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
+        <button id="edit-item-1" class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
       </div>
     </div>
 
-    <div class="card">
-      <img src="../images/15_plus_pink.jpg" class="card-img-top" alt="...">
+    <div class="card" id="card-2">
+      <img src="" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">iPhone 15 Plus</h5>
-        <p class="card-text">Color: Pink, 128 GB</p>
-        <span class="d-block mb-2">800$</span>
+        <h5 class="card-title"></h5>
+        <p class="card-text"></p>
         <a href="../pages/details.html?product=2" class="btn btn-primary view-btn">View</a>
-        <button class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
+        <button id="edit-item-2" class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
       </div>
     </div>
 
-    <div class="card">
-      <img src="../images/iphone_15_blue.jpg" class="card-img-top" alt="...">
+    <div class="card" id="card-3">
+      <img src="" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">iPhone 15</h5>
-        <p class="card-text">Color: Blue, 128 GB</p>
-        <span class="d-block mb-2">800$</span>
+        <h5 class="card-title"></h5>
+        <p class="card-text"></p>
         <a href="../pages/details.html?product=3" class="btn btn-primary view-btn">View</a>
-        <button class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
+        <button id="edit-item-3" class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
       </div>
     </div>
 
-    <div class="card">
-      <img src="../images/iphone_14_pro.jpg" class="card-img-top" alt="...">
+    <div class="card" id="card-4">
+      <img src="" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">iPhone 14 Pro</h5>
-        <p class="card-text">Color: Black, 256 GB</p>
-        <span class="d-block mb-2">850$</span>
+        <h5 class="card-title"></h5>
+        <p class="card-text"></p>
         <a href="../pages/details.html?product=4" class="btn btn-primary view-btn">View</a>
-        <button class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
+        <button id="edit-item-4" class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
       </div>
     </div>
 
-    <div class="card">
-      <img src="../images/14_pro_max.jpg" class="card-img-top" alt="...">
+    <div class="card" id="card-5">
+      <img src="" class="card-img-top" alt="...">
       <div class="card-body">
-        <h5 class="card-title">iPhone 14 Pro Max</h5>
-        <p class="card-text">Color: White, 256 GB</p>
-        <span class="d-block mb-2">850$</span>
+        <h5 class="card-title"></h5>
+        <p class="card-text"></p>
         <a href="../pages/details.html?product=5" class="btn btn-primary view-btn">View</a>
-        <button class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
+        <button id="edit-item-5" class="btn btn-primary edit-btn mt-2 hidden">Edit</button>
       </div>
     </div>
   </div>
@@ -186,6 +177,7 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
   <script src="../scripts/script.js"></script>
+  <script src="../scripts/details.js"></script>
   <script src="../scripts/edit.js"></script>
 </body>
 

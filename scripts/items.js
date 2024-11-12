@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', function () {
         const items = snapshot.val();
         const itemsList = document.getElementById('items-list');
 
+        if (!items) return;
+
         itemsList.innerHTML = '';
 
         for (let key in items) {
@@ -18,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 const item = items[key];
 
                 const card = document.createElement('div');
+                card.id = 'card-' + key;
                 card.classList.add('card');
                 card.style.width = "16rem";
 
@@ -49,10 +52,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 const editButton = document.createElement('button');
                 editButton.classList.add('edit-btn', 'btn', 'btn-primary', 'mt-2');
+                editButton.id = 'edit-btn-' + key;
                 editButton.textContent = 'Edit';
 
                 const deleteButton = document.createElement('button');
                 deleteButton.classList.add('delete-btn', 'btn', 'btn-danger', 'mt-2');
+                deleteButton.id = 'delete-btn-' + key;
                 deleteButton.textContent = 'Delete';
 
                 const buttonGroup = document.createElement('div');

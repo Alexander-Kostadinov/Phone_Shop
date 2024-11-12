@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const links = document.querySelectorAll('nav a');
     const quantity = document.getElementById('quantity');
     const orderForm = document.getElementById('orderForm');
+    const clearBtn = document.getElementById('clearButton');
     const itemsList = document.getElementById('items-list');
     const purchaseBtn = document.getElementById('purchaseBtn');
     const submitButton = document.getElementById('submitButton');
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
         itemLocation = 'Phones/' + productId;
 
         purchaseBtn.addEventListener('click', function () {
+            clearBtn.disabled = true;
             purchaseBtn.disabled = true;
             submitButton.disabled = true;
             orderForm.classList.remove('hidden');
@@ -246,6 +248,7 @@ document.addEventListener('DOMContentLoaded', function () {
             sendOrderItemDetails();
 
             if (purchaseBtn && submitButton) {
+                clearBtn.disabled = false;
                 purchaseBtn.disabled = false;
                 submitButton.disabled = false;
             }
@@ -304,6 +307,7 @@ document.addEventListener('DOMContentLoaded', function () {
         orderForm.classList.add('hidden');
 
         if (purchaseBtn && submitButton) {
+            clearBtn.disabled = false;
             purchaseBtn.disabled = false;
             submitButton.disabled = false;
         }
