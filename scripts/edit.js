@@ -103,10 +103,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (stock.value !== "") card.querySelectorAll('p')[2].textContent = stock.value;
             }
         }
-        else if (addItemClicked) {
-            const newId = newItemId(itemLocation);
-            itemLocation = itemLocation + '/' + newId;
-        }
 
         EdtiItem();
         CloseEditForm();
@@ -122,32 +118,25 @@ document.addEventListener('DOMContentLoaded', function () {
         if (stock.value.trim() !== "") updates.stock = parseInt(stock.value);
 
         if (Object.keys(updates).length === 0) {
-            alert("Няма нови стойности за актуализиране.");
+            alert("There are no new values to update.");
             return;
         }
-
-        const database = firebase.database();
-        const editItem = database.ref(itemLocation);
 
         if (addItemClicked) {
-            editItem.set(updates)
-                .then(() => {
-                    console.log("Елементът e успешно актуализиран!");
-                })
-                .catch((error) => {
-                    console.error("Грешка при актуализирането:", error);
-                });
-
-            return;
+            addItem(itemLocation, updates);
         }
+        else {
+            const database = firebase.database();
+            const editItem = database.ref(itemLocation);
 
-        editItem.update(updates)
+            editItem.update(updates)
             .then(() => {
-                console.log("Елементът e успешно актуализиран!");
+                console.log("The item is updated successfully!");
             })
             .catch((error) => {
-                console.error("Грешка при актуализирането:", error);
+                console.error("Error with updating the item:", error);
             });
+        }
     }
 
     function CloseEditForm() {
@@ -177,30 +166,45 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert("The item was deleted successfully!");
             })
             .catch((error) => {
-                alert("Error with deleting the item!");
+                alert("Error with deleting the item!", error);
             });
     }
 
-    function newItemId(category) {
-        let nextItemId = 0;
+    async function newItemId(category) {
         const database = firebase.database();
         const itemsRef = database.ref(category);
 
-        itemsRef.once('value', (snapshot) => {
-            if (!snapshot.exists()) return 1;
+        const snapshot = await itemsRef.once('value');
+        let nextItemId = 0;
 
-            snapshot.forEach((childSnapshot) => {
-                const currentItemId = parseInt(childSnapshot.key, 10);
+        if (!snapshot.exists()) {
+            return 1;
+        }
 
-                if (currentItemId - nextItemId > 1) {
-                    return true;
-                }
-                else if (currentItemId > nextItemId) {
-                    nextItemId = currentItemId;
-                }
-            });
+        snapshot.forEach((childSnapshot) => {
+            const currentItemId = parseInt(childSnapshot.key, 10);
+
+            if (currentItemId - nextItemId > 1) {
+                return true;
+            } else if (currentItemId >= nextItemId) {
+                nextItemId = currentItemId;
+            }
         });
 
         return nextItemId + 1;
+    }
+
+    async function addItem(category, newItemData) {
+        try {
+            const nextId = await newItemId(category);
+
+            const database = firebase.database();
+            const newItemRef = database.ref(`${category}/${nextId}`);
+
+            await newItemRef.set(newItemData);
+            console.log("New item is successfully added with ID:", nextId);
+        } catch {
+            console.error("Error with adding new item!", error);
+        }
     }
 });
